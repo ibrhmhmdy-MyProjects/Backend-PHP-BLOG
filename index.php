@@ -14,7 +14,7 @@
                     <p class="card-text"><?= $Str->excerpt($post['body'], 70); ?></p>
                     <div class="d-flex justify-content-between align-items-center">
                         <p class="text-muted"><?= $post['created_at'] ?></p>
-                        <a href="show.php?id=<?= $post['id']; ?>" class="btn btn-primary">Show</a>
+                        <a href="ShowPost.php?id=<?= $post['id']; ?>" class="btn btn-primary">Show</a>
                     </div>
 
                 </div>
