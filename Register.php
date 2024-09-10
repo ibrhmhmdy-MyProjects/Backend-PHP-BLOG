@@ -10,12 +10,12 @@
             <div class="col-lg-8">
               <h2 class="fw-bold mb-5">Sign up</h2>
               <?php    
-                if($session->hasSession("errors")){
-                    $errors = $session->Get("errors");
+                if($Session->hasSession("errors")){
+                    $errors = $Session->Get("errors");
                     foreach($errors as $error){
                         echo "<div class='alert alert-danger'>$error</div>";
                     }
-                    $session->Clear("errors");
+                    $Session->Clear("errors");
                 }
               ?>
               <form action="handlers/handleRegister.php" method="POST">
