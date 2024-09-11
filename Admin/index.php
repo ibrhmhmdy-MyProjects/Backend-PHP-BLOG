@@ -2,7 +2,8 @@
 
 <?php
 $user_id = $Session->Get("current_login")['id'];
-$posts = $db->SearchRow("posts", "user_id ='$user_id'");
+$values[] = $user_id; 
+$posts = $db->Get_Rows_Where("posts", "user_id =?",$values);
 ?>
 
 <div class="container my-5">
@@ -23,7 +24,7 @@ $posts = $db->SearchRow("posts", "user_id ='$user_id'");
         </thead>
         <tbody>
             <?php
-            foreach ($posts as $post) {
+            foreach($posts as $post){
             ?>
                 <tr>
                     <td>

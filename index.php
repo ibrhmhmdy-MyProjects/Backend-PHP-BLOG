@@ -1,13 +1,15 @@
 <?php include 'inc/header.php'; ?>
 <?php 
-$current_user = $Session->Get("current_login");
-$user_id = $current_user['id'];
-$username = $current_user['username'];
+if($Session->Get("current_login")){
+    $current_user = $Session->Get("current_login");
+    $user_id = $current_user['id'];
+    $username = $current_user['username'];
+}
 ?>
 <div class="container my-5">
     <div class="row">
-        <?php 
-        $posts = $db->ReadAll("posts");
+        <?php
+        $posts = $db->Get_All_Table("posts");
         foreach($posts as $post){
         ?>
         <div class="col-lg-4 mb-3">
@@ -15,6 +17,7 @@ $username = $current_user['username'];
                 <img src="assets/images/<?= $post['image'] ?>" class="card-img-top">
                 <div class="card-body">
                     <h5 class="card-title"><?= $post['title'] ?></h5>
+                    <?php $username = $db->Get_Col_ID("username","users",$post['user_id']); ?>
                     <p class="card-text">Author: <?= $username ?></p>    
                     <p class="card-text"><?= $Str->excerpt($post['body'], 70); ?></p>
                     <div class="d-flex justify-content-between align-items-center">

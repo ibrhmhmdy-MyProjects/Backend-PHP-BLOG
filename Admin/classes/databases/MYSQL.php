@@ -3,94 +3,121 @@
 namespace Classes\Databases;
 require_once "QueryBuilder.php";
 use Classes\Databases\QueryBuilder;
+use Exception;
+use PDO;
+use PDOException;
 
 class MYSQL {
+  
+  private $data_source = "mysql";
   private $host_name;
+  private $db_name;
   private $user_name;
   private $password;
-  private $database_name;
   
-  public function __construct($host_name,$database_name,$user_name,$password){
+  public function __construct($host_name,$db_name,$user_name,$password){
     $this->host_name = $host_name;
+    $this->db_name = $db_name;
     $this->user_name = $user_name;
     $this->password = $password;
-    $this->database_name = $database_name;
   }
   
   public function Connect(){
-    $conn = mysqli_connect($this->host_name,$this->user_name,$this->password,$this->database_name);
-    return ($conn) ? $conn : "Connection is Error";
+    try {
+        $Conn = new PDO("$this->data_source:host=$this->host_name;dbname=$this->db_name;charset=utf8", $this->user_name, $this->password);
+        $Conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $Conn;
+    } catch (PDOException $e) {
+        return "Connection is Error : <br>" . $e->getMessage();
+    }
   }
 
-  public function ReadAll($table){
-    $read_data = new QueryBuilder();
-    $query = $read_data->SelectAll($table);
-    $result = mysqli_query($this->Connect(),$query);
-    return $result ? mysqli_fetch_all($result,MYSQLI_ASSOC) : false;
+  public function Get_All_Table($tableName){
+    $table = new QueryBuilder();
+    $query = $table->Select_All_Table($tableName);
+    $stmt = $this->Connect()->prepare($query);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
   
-  public function ReadRow($table, $id){
-    $read_data = new QueryBuilder();
-    $query = $read_data->SelectRowByID($table, $id);
-    $row = mysqli_query($this->Connect(),$query);
-    $result = mysqli_fetch_assoc($row);
-    return mysqli_num_rows($row) > 0 ? $result : false;
+  public function Get_Row_ID($tableName, $id){
+    $table = new QueryBuilder();
+    $query = $table->Select_All_Table_ID($tableName);
+    $stmt = $this->Connect()->prepare($query);
+    $stmt->execute([$id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+  public function Get_Col_ID($column,$tableName,$id){
+    $query = "SELECT $column FROM $tableName Where id = ?";
+    $stmt = $this->Connect()->prepare($query);
+    $stmt->execute([$id]);
+    return $stmt->fetchColumn();
+  }
+  // Get One Row Data
+  public function Get_Row_Where($tableName,$columns,$arr_values){
+    $table = new QueryBuilder();
+    $query = $table->Select_All_Table_Where($tableName,$columns);
+    $stmt = $this->Connect()->prepare($query);
+    $stmt->execute($arr_values);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+  // Get Multi Rows Data
+  public function Get_Rows_Where($tableName,$columns,$arr_values){
+    $table = new QueryBuilder();
+    $query = $table->Select_All_Table_Where($tableName,$columns);
+    $stmt = $this->Connect()->prepare($query);
+    $stmt->execute($arr_values);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function SearchRow($table,$conditions){
-    $read_data = new QueryBuilder();
-    $query = $read_data->SelectRowByWhere($table, $conditions);
-    $rows = mysqli_query($this->Connect(),$query);
-    $result = \mysqli_fetch_all($rows, \MYSQLI_ASSOC);
-    return mysqli_num_rows($rows) > 0 ? $result : false;
+  // AddRow = TableName, Columns[], Values[]
+  public function AddRow($tableName,$columns,$values){
+    $table = new QueryBuilder();
+    if (count($columns) !== count($values)) {
+      throw new Exception('عدد الحقول والقيم غير متساوٍ.');
+    }
+    $cols_string = implode(", ", $columns);
+    $values_string = implode(", ", array_fill(0, count($values), "?"));
+    $query = $table->InsertRow($tableName,$cols_string,$values_string);
+    $stmt = $this->Connect()->prepare($query);
+    return $stmt->execute($values);
+  }
+  /* 
+  ** UpdateRow = TableName, Columns[], Values[], Where ID 
+  */
+  public function UpdateRow($tableName,$columns,$values,$id){
+    $table = new QueryBuilder();
+    if (count($columns) !== count($values)) {
+      throw new Exception('عدد الحقول والقيم غير متساوٍ.');
+    }
+    $setClause = implode(" = ?, ", $columns) . " = ?";
+    $query = $table->UpdateRow($tableName,$setClause,$id);
+    $stmt = $this->Connect()->prepare($query);
+    return $stmt->execute($values);
   }
 
-  public function AddRow($table,$columns,$values){
-    $query = new QueryBuilder();
-    $new_data = $query->InsertData($table,$columns,$values);
-    $result = mysqli_query($this->Connect(),$new_data);
-    return $result ? true : false;
+  public function DeleteRow($tableName,$id){
+    $table = new QueryBuilder();
+    $query = $table->DeleteRow($tableName, $id);
+    $stmt = $this->Connect()->prepare($query);
+    $stmt->execute(['id' => $id]);
   }
-  
-  public function UpdateRow($table,$row_update,$id){
-    $query = new QueryBuilder();
-    $new_data = $query->UpdateData($table,$row_update,$id);
-    $result = mysqli_query($this->Connect(),$new_data);
-    return $result ? true : false;
+  public function CountRows($tableName){
+    $table = new QueryBuilder();
+    $query = $table->Count_All_Rows($tableName);
+    $stmt = $this->Connect()->prepare($query);
+    return $stmt->execute();
   }
-
-  public function DeleteRow($table,$id){
-    $query = new QueryBuilder();
-    $delete_row = $query->DeleteData($table,$id);
-    $result = mysqli_query($this->Connect(),$delete_row);
-    return $result ? true : false;
+  public function CountRowsByID($tableName,$id){
+    $table = new QueryBuilder();
+    $query = $table->Count_Rows_ID($tableName,$id);
+    $stmt = $this->Connect()->prepare($query);
+    return $stmt->execute($id);
   }
-  public function CountRows($table){
+  public function CountRowsByWhere($tableName,$conditions){
     $query = new QueryBuilder();
-    $sql = $query->CountRows($table);
-    $query_count = mysqli_query($this->Connect(),$sql);
-    $result = mysqli_num_rows($query_count);
-    return $result;
-  }
-  public function CountRowsByID($table,$id){
-    $query = new QueryBuilder();
-    $sql = $query->CountID($table,$id);
-    $query_count = mysqli_query($this->Connect(),$sql);
-    $result = mysqli_num_rows($query_count);
-    return $result;
-  }
-  public function CountRowsByWhere($table,$conditions){
-    $query = new QueryBuilder();
-    $sql = $query->CountWhere($table,$conditions);
-    $query_count = mysqli_query($this->Connect(),$sql);
-    $result = mysqli_num_rows($query_count);
-    return $result;
-  }
-  public function getImageName($colName,$table,$id){
-    $read_data = new QueryBuilder();
-    $query = $read_data->SelectColsByID($colName,$table, $id);
-    $row = mysqli_query($this->Connect(),$query);
-    $result = mysqli_fetch_assoc($row);
-    return mysqli_num_rows($row) > 0 ? $result[$colName] : false;
+    $sql = $query->Count_Rows_Where($tableName,$conditions);
+    $stmt = $this->Connect()->prepare($sql);
+    return $stmt->execute();
   }
 }

@@ -1,19 +1,19 @@
 <?php
-require_once "classes/databases/MYSQL.php";
-require_once "classes/Validations/Validator.php";
-require_once "classes/Sessions.php";
-require_once "classes/Request.php";
-require_once "classes/UploadFiles.php";
-require_once "classes/Strings.php";
+require_once "Admin/classes/databases/MYSQL.php";
+require_once "Admin/classes/Validations/Validator.php";
+require_once "Admin/classes/Sessions.php";
+require_once "Admin/classes/Request.php";
+require_once "Admin/classes/UploadFiles.php";
+require_once "Admin/classes/Strings.php";
 
-use Classes\Databases\MYSQL;
+use classes\databases\MYSQL;
 use classes\Validations\Validator;
-use Classes\Sessions;
-use Classes\Request;
+use classes\Sessions;
+use classes\Request;
 use classes\UploadFiles;
 use classes\Strings;
 
-$db = new MYSQL("localhost","db_blog","root","");
+$db = new MYSQL("localhost", "db_blog", "root", "");
 $db->Connect();
 $valid = new Validator();
 $Session = new Sessions();

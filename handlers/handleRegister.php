@@ -13,9 +13,9 @@ if($req->hasRequest($req->POST("submit"))){
 
   if(!$valid->errors){
     $password = password_hash($password,PASSWORD_DEFAULT);
-    $db->AddRow("users",
-                "username,email,password",
-                "'$username','$email','$password'");
+    $columns = ["username","email","password"];
+    $values = [$username,$email,$password];
+    $db->AddRow("users",$columns,$values);
     $req->Redirect("../login.php");
   }else{
     $Session->Set("errors",$valid->errors);

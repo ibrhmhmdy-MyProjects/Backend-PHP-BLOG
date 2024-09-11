@@ -4,13 +4,11 @@
     <div class="row">
     <?php
         $post_id = $req->GET("id");
-        $post = $db->ReadRow("posts",$post_id);
+        $post = $db->Get_Row_ID("posts",$post_id);
         $author_id = $post["user_id"];
-        $author_user = $db->ReadRow("users",$author_id);
-        $author_name = $author_user['username'];
+        $author_name = $db->Get_Col_ID("username","users",$author_id);
         ?>
-        <img src="assets/images/<?= $post['image'] ?>" class="card-img-top" height="500" width="300">
-
+            <img src="assets/images/<?= $post['image'] ?>" class="card-img-top" height="500" width="300">
             <h5 ><?= $post['title'] ?></h5>
             <p class="text-muted">Publish: <?= $post['created_at'] ?></p>
             <p class="text-muted">Author: <?= $author_name ?></p>

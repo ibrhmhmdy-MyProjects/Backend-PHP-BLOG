@@ -4,92 +4,65 @@ namespace Classes\Databases;
 
 class QueryBuilder
 {
-  // SELECT All Columns From Table
-  public function SelectAll($table)
-  {
-    return "SELECT * FROM $table";
+  // SELECT Data
+  public function Select_All_Table($tableName){
+    return "SELECT * FROM $tableName";
   }
-  // SELECT Row From Table By ID
-  public function SelectRowByID($table, $id)
-  {
-    return "SELECT * FROM $table WHERE id ='$id'";
+  public function Select_Cols_Table($cols,$tableName){
+    return "SELECT $cols FROM $tableName";
   }
-  // SELECT Rows From Table By Conditions
-  public function SelectRowByWhere($table, $conditions)
-  {
-    return "SELECT * FROM $table WHERE $conditions";
+  public function Select_All_Table_ID($tableName){
+    return "SELECT * FROM $tableName WHERE id = ?";
   }
-  // SELECT All Columns From Table By Conditions
-  public function SelectAllWhere($table, $conditions)
-  {
-    return "SELECT * FROM $table WHERE $conditions";
+  public function Select_Cols_Table_ID($cols,$tableName){
+    return "SELECT $cols FROM $tableName WHERE id = ?";
   }
-  // SELECT Columns From Table without Conditions
-  public function SelectCols($columns, $table)
-  {
-    return "SELECT $columns FROM $table";
+  public function Select_All_Table_Where($tableName, $conditions){
+    return "SELECT * FROM $tableName WHERE $conditions";
   }
-  // SELECT Columns From Table By ID
-  public function SelectColsByID($columns, $table, $id)
-  {
-    return "SELECT $columns FROM $table WHERE id = '$id'";
-  }
-  // SELECT Columns From Table With Conditions
-  public function SelectColsWhere($columns, $table, $conditions)
-  {
-    return "SELECT $columns FROM $table WHERE $conditions";
-  }
-  // Insert New Row
-  public function InsertData($table, $columns, $values)
-  {
-    return "INSERT INTO $table($columns)VALUES($values)";
-  }
-  // Prepare Data to Update => Convert Data from Array to String
-  public function prepareUpdate($array_data)
-  {
-    $string_data = "";
-    foreach ($array_data as $key => $value) {
-      $string_data .= "$key = '$value', ";
-    }
-    $string_data = rtrim($string_data, ", ");
-    return $string_data;
-  }
-  // Update One Row By ID
-  public function UpdateData($table, $array_data, $id)
-  {
-    $update_data = $this->prepareUpdate($array_data);
-    return "UPDATE $table SET $update_data WHERE id = '$id'";
-  }
-  // Update One or More Row By Conditions
-  public function UpdateWhere($table, $array_data, $conditions)
-  {
-    $update_data = $this->prepareUpdate($array_data);
-    return "UPDATE $table SET $update_data WHERE $conditions";
-  }
-  // DELETE By ID
-  public function DeleteData($table, $id)
-  {
-    return "DELETE FROM $table WHERE id = '$id'";
+  public function Select_Cols_Table_Where($columns, $tableName, $conditions){
+    return "SELECT $columns FROM $tableName WHERE $conditions";
   }
 
-  public function DeleteWhere($table, $conditions)
+  // Insert New Row
+  public function InsertRow($tableName, $columns, $values)
   {
-    return "DELETE FROM $table WHERE $conditions";
+    return "INSERT INTO $tableName($columns)VALUES($values)";
+  }
+  // Update One Row By ID
+  public function UpdateRow($tableName, $string_data, $id)
+  {
+    return "UPDATE $tableName SET $string_data WHERE id = :$id";
+  }
+  // Update One or More Row By Conditions
+  public function UpdateRowWhere($tableName, $string_data, $conditions)
+  {
+    return "UPDATE $tableName SET $string_data WHERE $conditions";
+  }
+  // DELETE By ID
+  public function DeleteRow($tableName, $id)
+  {
+    return "DELETE FROM $tableName WHERE id = :$id";
+  }
+
+  public function DeleteWhere($tableName, $conditions)
+  {
+    return "DELETE FROM $tableName WHERE $conditions";
   }
 
   // Get Count Rows
-  public function CountRows($table)
+  public function Count_All_Rows($tableName)
   {
-    return "SELECT * FROM $table";
+    return "SELECT count(*) FROM $tableName";
   }
 
-  public function CountID($table, $id)
+  public function Count_Rows_ID($tableName, $id)
   {
-    return "SELECT * FROM $table WHERE id = '$id'";
+    return "SELECT count(*) FROM $tableName WHERE id = '$id'";
   }
 
-  public function CountWhere($table, $conditions)
+  public function Count_Rows_Where($tableName, $conditions)
   {
-    return "SELECT * FROM $table WHERE $conditions";
+    return "SELECT count(*) FROM $tableName WHERE $conditions";
   }
 }
