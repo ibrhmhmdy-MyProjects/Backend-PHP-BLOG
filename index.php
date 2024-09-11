@@ -11,12 +11,11 @@
                 <img src="assets/images/<?= $post['image'] ?>" class="card-img-top">
                 <div class="card-body">
                     <h5 class="card-title"><?= $post['title'] ?></h5>
+                    <small class="text-muted m-0 p-0"><?= $post['created_at'] ?></small>
                     <p class="card-text"><?= $Str->excerpt($post['body'], 70); ?></p>
                     <div class="d-flex justify-content-between align-items-center">
-                        <p class="text-muted"><?= $post['created_at'] ?></p>
-                        <a href="ShowPost.php?id=<?= $post['id']; ?>" class="btn btn-primary">Show</a>
+                        <a href="ViewPost.php?id=<?= $post['id']; ?>" class="btn btn-primary">View Post</a>
                     </div>
-
                 </div>
             </div>
         </div>
