@@ -83,12 +83,12 @@ class QueryBuilder
     return "SELECT * FROM $table";
   }
 
-  public function CountRowsByID($table, $id)
+  public function CountID($table, $id)
   {
     return "SELECT * FROM $table WHERE id = '$id'";
   }
 
-  public function CountRowsByWhere($table, $conditions)
+  public function CountWhere($table, $conditions)
   {
     return "SELECT * FROM $table WHERE $conditions";
   }

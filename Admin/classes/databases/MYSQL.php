@@ -72,7 +72,20 @@ class MYSQL {
     $result = mysqli_num_rows($query_count);
     return $result;
   }
-
+  public function CountRowsByID($table,$id){
+    $query = new QueryBuilder();
+    $sql = $query->CountID($table,$id);
+    $query_count = mysqli_query($this->Connect(),$sql);
+    $result = mysqli_num_rows($query_count);
+    return $result;
+  }
+  public function CountRowsByWhere($table,$conditions){
+    $query = new QueryBuilder();
+    $sql = $query->CountWhere($table,$conditions);
+    $query_count = mysqli_query($this->Connect(),$sql);
+    $result = mysqli_num_rows($query_count);
+    return $result;
+  }
   public function getImageName($colName,$table,$id){
     $read_data = new QueryBuilder();
     $query = $read_data->SelectColsByID($colName,$table, $id);

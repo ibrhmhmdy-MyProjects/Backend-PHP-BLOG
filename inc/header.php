@@ -23,7 +23,7 @@
                                 $email = $current_user['email'];
                         ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="Admin/index.php?id=<?= $user_id; ?>"><?= $username ?></a>
+                            <a class="nav-link" href="Admin/index.php?id=<?= $user_id; ?>"><?= $username ?>(Admin)</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="handlers/handleLogout.php">Logout</a>
