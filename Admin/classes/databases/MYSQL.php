@@ -61,7 +61,7 @@ class MYSQL {
     $stmt->execute($arr_values);
     return $stmt->fetch(PDO::FETCH_ASSOC);
   }
-  // Get Multi Rows Data
+  // Get Multi Rows Data By Conditions
   public function Get_Rows_Where($tableName,$columns,$arr_values){
     $table = new QueryBuilder();
     $query = $table->Select_All_Table_Where($tableName,$columns);

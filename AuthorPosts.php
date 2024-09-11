@@ -4,11 +4,15 @@
 $current_user = $Session->Get("current_login");
 $user_id = $current_user['id'];
 $username = $current_user['username'];
+$author_id = $req->GET("author");
+$value[] = $author_id;
+echo $author_id;
+$posts = $db->Get_Rows_Where("posts","user_id=?",[$author_id]);
+
 ?>
 <div class="container my-5">
     <div class="row">
         <?php 
-        $posts = $db->SearchRow("posts");
         foreach($posts as $post){
         ?>
         <div class="col-lg-4 mb-3">

@@ -1,6 +1,5 @@
 <?php require_once "./App.php"; ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
