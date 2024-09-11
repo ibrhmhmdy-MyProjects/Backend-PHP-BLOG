@@ -40,9 +40,9 @@ class MYSQL {
   public function SearchRow($table,$conditions){
     $read_data = new QueryBuilder();
     $query = $read_data->SelectRowByWhere($table, $conditions);
-    $row = mysqli_query($this->Connect(),$query);
-    $result = mysqli_fetch_assoc($row);
-    return mysqli_num_rows($row) > 0 ? $result : false;
+    $rows = mysqli_query($this->Connect(),$query);
+    $result = \mysqli_fetch_all($rows, \MYSQLI_ASSOC);
+    return mysqli_num_rows($rows) > 0 ? $result : false;
   }
 
   public function AddRow($table,$columns,$values){

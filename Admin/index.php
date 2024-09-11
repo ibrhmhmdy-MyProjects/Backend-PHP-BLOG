@@ -1,26 +1,78 @@
 <?php require_once "inc/header.php"; ?>
 
+<?php
+$user_id = $Session->Get("current_login")['id'];
+$posts = $db->SearchRow("posts", "user_id ='$user_id'");
+?>
+
 <div class="container my-5">
-    <div class="row">
-        <?php 
-        $posts = $db->ReadAll("posts");
-        foreach($posts as $post){
-        ?>
-        <div class="col-lg-4 mb-3">
-            <div class="card">
-                <img src="assets/images/<?= $post['image'] ?>" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title"><?= $post['title'] ?></h5>
-                    <small class="text-muted m-0 p-0"><?= $post['created_at'] ?></small>
-                    <p class="card-text"><?= $Str->excerpt($post['body'], 70); ?></p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <a href="ViewPost.php?id=<?= $post['id']; ?>" class="btn btn-primary">View Post</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <?php } ?>       
-    </div>
+    <caption>
+        <button type="button" class="btn btn-sm btn-primary">
+            New Post
+        </button>
+    </caption>
+    <table class="table align-middle mb-0 bg-white">
+        <thead class="bg-light">
+            <tr>
+                <th>Title</th>
+                <th>Body</th>
+                <th>Status</th>
+                <th>Publish Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach ($posts as $post) {
+            ?>
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img
+                                src="assets/images/<?= $post['image'] ?>"
+                                alt=""
+                                style="width: 45px; height: 45px"
+                                class="rounded-circle" />
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1"><?= $post['title'] ?></p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <p class="fw-bold mb-1"><?= $Str->excerpt($post['body'], 50) ?></p>
+                        </div>
+                    </td>
+                    <td>
+                        <?php if($post['status'] == 1){?>
+                            <span class="badge bg-success">Publishing</span>
+                        <?php }else{ ?>
+                            <span class="badge bg-secondary">In Progress...</span>
+                        <?php } ?>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1"><?= $post['created_at'] ?></p>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                Edit
+                            </button>
+                            <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                Delete
+                            </button>
+                            <?php if($post['status'] == 0){?>
+                            <button type="button" class="btn btn-link btn-sm btn-rounded">
+                                Publish
+                            </button>
+                            <?php } ?>
+                        </div>
+                    </td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+
 </div>
 
 <?php include 'inc/footer.php'; ?>
