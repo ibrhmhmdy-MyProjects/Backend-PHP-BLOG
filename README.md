@@ -1,3 +1,3 @@
 # PHP
-## OOP
-## PDO With MYSQL
+# MYSQL (PDO)
+# OOP
