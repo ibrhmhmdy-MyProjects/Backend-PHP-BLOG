@@ -11,7 +11,7 @@
             <img src="assets/images/<?= $post['image'] ?>" class="card-img-top" height="500" width="300">
             <h5 ><?= $post['title'] ?></h5>
             <p class="text-muted">Publish: <?= $post['created_at'] ?></p>
-            <a href="AuthorPosts.php?author=<?= $author_id ?>" class="text-muted">Author: <?= $author_name ?></a>
+            <p class="card-text">Author: <a href="AuthorPosts.php?author_id=<?= $post['user_id'] ?>&author_name=<?= $author_name ?>" class="btn-link btn-sm"><?= $author_name ?></a> </p>    
             <p><?= $post['body'] ?></p>
             <div class="d-flex justify-content-center align-items-center my-3">
                 <a href="index.php" class="btn btn-primary mx-5 px-5">Back</a>

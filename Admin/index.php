@@ -8,9 +8,9 @@ $posts = $db->Get_Rows_Where("posts", "user_id =?",$values);
 
 <div class="container my-5">
     <caption>
-        <button type="button" class="btn btn-sm btn-primary">
+        <a href="AddPost.php" type="button" class="btn btn-sm btn-primary">
             New Post
-        </button>
+        </a>
     </caption>
     <table class="table align-middle mb-0 bg-white">
         <thead class="bg-light">
@@ -56,16 +56,16 @@ $posts = $db->Get_Rows_Where("posts", "user_id =?",$values);
                     </td>
                     <td>
                         <div class="d-flex align-items-center">
-                            <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            <a href="EditPost.php?=<?= $post['id'] ?>" type="button" class="btn btn-link btn-sm btn-rounded">
                                 Edit
-                            </button>
-                            <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            </a>
+                            <a href="handlers/handleDeletePost.php?id=<?= $post['id'] ?>" type="button" class="btn btn-link btn-sm btn-rounded">
                                 Delete
-                            </button>
+                            </a>
                             <?php if($post['status'] == 0){?>
-                            <button type="button" class="btn btn-link btn-sm btn-rounded">
+                            <a href="handlers/handlePublishPost.php?id=<?= $post['id'] ?>" type="button" class="btn btn-link btn-sm btn-rounded">
                                 Publish
-                            </button>
+                            </a>
                             <?php } ?>
                         </div>
                     </td>

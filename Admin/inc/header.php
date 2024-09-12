@@ -16,17 +16,17 @@
                 <nav class="navbar-nav ml-auto">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <?php
-                            if($Session->hasSession("current_login")){
-                                $current_user = $Session->Get("current_login");
-                                $user_id = $current_user['id'];
-                                $username = $current_user['username'];
-                                $email = $current_user['email'];
-                        ?>
-                        <?php
-                            $post_count = $db->CountRowsByWhere("posts","user_id='$user_id'");
+                        if($Session->hasSession("current_login")){
+                            $current_user = $Session->Get("current_login");
+                            $user_id = $current_user['id'];
+                            $username = $current_user['username'];
+                            $email = $current_user['email'];
+
+
+                            $countPosts = $db->CountRowsWhere("posts","user_id=?",$user_id);
                         ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php?id=<?= $user_id; ?>"><?= $username . "(" .$post_count . ")"; ?></a>
+                            <a class="nav-link" href="index.php?id=<?= $user_id; ?>"><?= $username . "(" .$countPosts . ")"; ?></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="handlers/handleLogout.php">Logout</a>

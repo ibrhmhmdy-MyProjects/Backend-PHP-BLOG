@@ -74,7 +74,7 @@ class MYSQL {
   public function AddRow($tableName,$columns,$values){
     $table = new QueryBuilder();
     if (count($columns) !== count($values)) {
-      throw new Exception('عدد الحقول والقيم غير متساوٍ.');
+      throw new Exception('Columns and Values Not Match');
     }
     $cols_string = implode(", ", $columns);
     $values_string = implode(", ", array_fill(0, count($values), "?"));
@@ -84,6 +84,7 @@ class MYSQL {
   }
   /* 
   ** UpdateRow = TableName, Columns[], Values[], Where ID 
+  ** Handle in Progress
   */
   public function UpdateRow($tableName,$columns,$values,$id){
     $table = new QueryBuilder();
@@ -95,29 +96,35 @@ class MYSQL {
     $stmt = $this->Connect()->prepare($query);
     return $stmt->execute($values);
   }
-
+  // Handle in Progress
   public function DeleteRow($tableName,$id){
     $table = new QueryBuilder();
     $query = $table->DeleteRow($tableName, $id);
     $stmt = $this->Connect()->prepare($query);
     $stmt->execute(['id' => $id]);
   }
+  // Handle in Progress
   public function CountRows($tableName){
     $table = new QueryBuilder();
     $query = $table->Count_All_Rows($tableName);
     $stmt = $this->Connect()->prepare($query);
-    return $stmt->execute();
+    $stmt->execute();
+    return $stmt->fetchColumn();
   }
-  public function CountRowsByID($tableName,$id){
+  // Handle in Progress
+  public function CountRowsID($tableName,$id){
     $table = new QueryBuilder();
     $query = $table->Count_Rows_ID($tableName,$id);
     $stmt = $this->Connect()->prepare($query);
-    return $stmt->execute($id);
+    $stmt->execute($id);
+    return $stmt->fetchColumn();
   }
-  public function CountRowsByWhere($tableName,$conditions){
+  // Handle in Progress
+  public function CountRowsWhere($tableName,$columns,$param){
     $query = new QueryBuilder();
-    $sql = $query->Count_Rows_Where($tableName,$conditions);
+    $sql = $query->Count_Rows_Where($tableName,$columns);
     $stmt = $this->Connect()->prepare($sql);
-    return $stmt->execute();
+    $stmt->execute([$param]);
+    return $stmt->fetchColumn();
   }
 }
