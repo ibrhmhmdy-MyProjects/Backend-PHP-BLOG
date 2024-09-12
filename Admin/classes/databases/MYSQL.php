@@ -84,7 +84,6 @@ class MYSQL {
   }
   /* 
   ** UpdateRow = TableName, Columns[], Values[], Where ID 
-  ** Handle in Progress
   */
   public function UpdateRow($tableName,$columns,$values,$id){
     $table = new QueryBuilder();
@@ -92,16 +91,18 @@ class MYSQL {
       throw new Exception('عدد الحقول والقيم غير متساوٍ.');
     }
     $setClause = implode(" = ?, ", $columns) . " = ?";
-    $query = $table->UpdateRow($tableName,$setClause,$id);
+    $query = $table->UpdateRow($tableName,$setClause);
+    $arr_id[] = $id;
+    $arr_values = \array_merge($values,$arr_id);
     $stmt = $this->Connect()->prepare($query);
-    return $stmt->execute($values);
+    return $stmt->execute($arr_values);
   }
   // Handle in Progress
   public function DeleteRow($tableName,$id){
     $table = new QueryBuilder();
     $query = $table->DeleteRow($tableName, $id);
     $stmt = $this->Connect()->prepare($query);
-    $stmt->execute(['id' => $id]);
+    $stmt->execute([$id]);
   }
   // Handle in Progress
   public function CountRows($tableName){

@@ -30,9 +30,9 @@ class QueryBuilder
     return "INSERT INTO $tableName($columns)VALUES($values)";
   }
   // Update One Row By ID
-  public function UpdateRow($tableName, $string_data, $id)
+  public function UpdateRow($tableName, $string_data)
   {
-    return "UPDATE $tableName SET $string_data WHERE id = :$id";
+    return "UPDATE $tableName SET $string_data WHERE id = ?";
   }
   // Update One or More Row By Conditions
   public function UpdateRowWhere($tableName, $string_data, $conditions)

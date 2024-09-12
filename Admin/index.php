@@ -30,7 +30,7 @@ $posts = $db->Get_Rows_Where("posts", "user_id =?",$values);
                     <td>
                         <div class="d-flex align-items-center">
                             <img
-                                src="assets/images/<?= $post['image'] ?>"
+                                src="assets/upload/<?= $post['image'] ?>"
                                 alt=""
                                 style="width: 45px; height: 45px"
                                 class="rounded-circle" />
@@ -56,7 +56,7 @@ $posts = $db->Get_Rows_Where("posts", "user_id =?",$values);
                     </td>
                     <td>
                         <div class="d-flex align-items-center">
-                            <a href="EditPost.php?=<?= $post['id'] ?>" type="button" class="btn btn-link btn-sm btn-rounded">
+                            <a href="EditPost.php?id=<?= $post['id'] ?>" type="button" class="btn btn-link btn-sm btn-rounded">
                                 Edit
                             </a>
                             <a href="handlers/handleDeletePost.php?id=<?= $post['id'] ?>" type="button" class="btn btn-link btn-sm btn-rounded">
