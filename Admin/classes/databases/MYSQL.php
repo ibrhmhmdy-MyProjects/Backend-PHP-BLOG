@@ -100,7 +100,7 @@ class MYSQL {
   // Handle in Progress
   public function DeleteRow($tableName,$id){
     $table = new QueryBuilder();
-    $query = $table->DeleteRow($tableName, $id);
+    $query = $table->DeleteRow($tableName);
     $stmt = $this->Connect()->prepare($query);
     $stmt->execute([$id]);
   }

@@ -12,11 +12,6 @@ if($req->hasRequest($req->POST("submit"))){
   $user_password = $userLogin['password'];
   
   if(!password_verify($login_password,$user_password) || $login_email != $user_email){
-    echo $login_email . "<br>";
-    echo $user_email . "<br>";
-    echo $login_password . "<br>";
-    echo $user_password . "<br>";
-    die;
     $valid->errors[] = "Email or Password is not Correct";
     $Session->Set("errors",$valid->errors);
   }

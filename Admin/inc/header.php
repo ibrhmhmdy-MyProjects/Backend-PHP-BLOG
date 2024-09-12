@@ -29,7 +29,7 @@
                             <a class="nav-link" href="index.php?id=<?= $user_id; ?>"><?= $username . "(" .$countPosts . ")"; ?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="handlers/handleLogout.php">Logout</a>
+                            <a class="nav-link" href="../handlers/handleLogout.php">Logout</a>
                         </li>
                         <?php }else{ ?>
                         <li class="nav-item">

@@ -17,7 +17,7 @@
         ?>
         <div class="col-lg-4 mb-3">
             <div class="card">
-                <img src="assets/images/<?= $post['image'] ?>" class="card-img-top">
+                <img src="admin/assets/upload/<?= $post['image'] ?>" class="card-img-top">
                 <div class="card-body">
                     <h5 class="card-title"><?= $post['title'] ?></h5>
                     <p class="card-text">Author: <?= $author_name ?></p>    

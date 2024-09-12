@@ -40,9 +40,9 @@ class QueryBuilder
     return "UPDATE $tableName SET $string_data WHERE $conditions";
   }
   // DELETE By ID
-  public function DeleteRow($tableName, $id)
+  public function DeleteRow($tableName)
   {
-    return "DELETE FROM $tableName WHERE id = :$id";
+    return "DELETE FROM $tableName WHERE id = ?";
   }
 
   public function DeleteWhere($tableName, $conditions)

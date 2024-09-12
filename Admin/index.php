@@ -24,6 +24,13 @@ $posts = $db->Get_Rows_Where("posts", "user_id =?",$values);
         </thead>
         <tbody>
             <?php
+            if(!$posts){?>
+                <tr>
+                    <td colspan="5">
+                        <div class="text-center w-100">No Posts Now</div>
+                    </td>
+                </tr>
+                <?php }else{
             foreach($posts as $post){
             ?>
                 <tr>
@@ -70,6 +77,7 @@ $posts = $db->Get_Rows_Where("posts", "user_id =?",$values);
                         </div>
                     </td>
                 </tr>
+            <?php } ?>
             <?php } ?>
         </tbody>
     </table>
