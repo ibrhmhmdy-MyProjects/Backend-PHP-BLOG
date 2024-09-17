@@ -12,7 +12,7 @@ $author = $db->Get_Row_ID("users",$id);
         <div class="card-body py-5 px-md-5">
           <div class="row d-flex justify-content-center">
             <div class="col-lg-8">
-              <h2 class="fw-bold mb-5">Sign up</h2>
+              <h2 class="fw-bold mb-5">Edit Info</h2>
               <?php    
                 if($Session->hasSession("errors")){
                     $errors = $Session->Get("errors");

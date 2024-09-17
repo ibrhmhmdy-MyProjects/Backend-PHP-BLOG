@@ -23,7 +23,7 @@
                 <div class="card-body">
                     <h5 class="card-title"><?= $post['title'] ?></h5>
                     <?php $author_name = $db->Get_Col_ID("username","users",$post['user_id']); ?>
-                    <p class="card-text">Author: <a href="AuthorPosts.php?author_id=<?= $post['user_id'] ?>&author_name=<?= $author_name ?>" class="btn-link btn-sm"><?= $author_name ?></a> </p>    
+                    <p class="card-text">Author: <a href="AuthorAllPosts.php?author_id=<?= $post['user_id'] ?>&author_name=<?= $author_name ?>" class="btn-link btn-sm"><?= $author_name ?></a> </p>    
                     <p class="card-text"><?= $Str->excerpt($post['body'], 70); ?></p>
                     <div class="d-flex justify-content-between align-items-center">
                         <small class="text-muted m-0 p-0"><?= $post['created_at'] ?></small>

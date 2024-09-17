@@ -19,7 +19,7 @@
                             <a class="nav-link" href="index.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="ViewAuthors.php">authors</a>
+                            <a class="nav-link" href="ViewAllAuthors.php">Authors</a>
                         </li>
                         <?php
                             if($Session->hasSession("current_login")){
