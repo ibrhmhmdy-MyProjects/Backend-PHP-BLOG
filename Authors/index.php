@@ -8,12 +8,17 @@ $posts = $db->Get_Rows_Where("posts", "user_id =?",[$user_id]);
 
 <div class="container my-5">
     <div class="d-flex justify-content-between align-items-center w-100 mb-3">
-        <caption class="nav-link" href="EditAuthor.php?id=<?= $user_id; ?>">
+        <span class="fw-bold" href="EditAuthor.php?id=<?= $user_id; ?>">
             Posts (<?=$countPosts ?>)
-        </caption>
-        <a href="AddPost.php" type="button" class="btn btn-sm btn-primary">
-            New Post
-        </a>
+        </span>
+        <span>
+            <a href="AddPost.php" type="button" class="btn btn-sm btn-primary">
+                New Post
+            </a>
+            <a href="handlers/handleDeleteAllPosts.php?id=<?= $user_id ?>" type="button" class="btn btn-sm btn-danger">
+                Delete All
+            </a>
+        </span>
     </div>
     <table class="table align-middle mb-0 bg-white">
         <thead class="bg-light">

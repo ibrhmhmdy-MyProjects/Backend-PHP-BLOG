@@ -22,6 +22,9 @@
                 <a class="navbar-brand" href="index.php?id=<?= $user_id; ?>">BLOG</a>               
                 <nav class="navbar-nav ml-auto">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.php">Home</a>
+                        </li>
                         <?php
                             $countPosts = $db->CountRowsWhere("posts","user_id=?",$user_id);
                         ?>

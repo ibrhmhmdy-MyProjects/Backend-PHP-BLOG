@@ -12,9 +12,15 @@
     <body>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container">
-                <a class="navbar-brand" href="index.php">BLOG</a>               
-                <nav class="navbar-nav ml-auto">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <a class="navbar-brand" href="index.php">BLOG</a>
+                <nav class="navbar-nav ">
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="ViewAuthors.php">authors</a>
+                        </li>
                         <?php
                             if($Session->hasSession("current_login")){
                                 $current_user = $Session->Get("current_login");
@@ -23,7 +29,7 @@
                                 $email = $current_user['email'];
                         ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="Authors/index.php?id=<?= $user_id; ?>">Profile</a>
+                            <a class="nav-link" href="Authors/index.php?id=<?= $user_id; ?>">MyPosts</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="handlers/handleLogout.php">Logout</a>
@@ -38,5 +44,6 @@
                         <?php }?>
                     </ul>
                 </nav>
+               
             </div>
         </nav>

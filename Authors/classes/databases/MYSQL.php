@@ -53,6 +53,12 @@ class MYSQL {
     $stmt->execute([$id]);
     return $stmt->fetchColumn();
   }
+  public function Get_Col_Where($column,$tableName,$conditions,$params){
+    $query = "SELECT $column FROM $tableName Where $conditions";
+    $stmt = $this->Connect()->prepare($query);
+    $stmt->execute([$params]);
+    return $stmt->fetchColumn();
+  }
   // Get One Row Data
   public function Get_Row_Where($tableName,$columns,$arr_values){
     $table = new QueryBuilder();
@@ -97,14 +103,14 @@ class MYSQL {
     $stmt = $this->Connect()->prepare($query);
     return $stmt->execute($arr_values);
   }
-  // Handle in Progress
+
   public function DeleteRow($tableName,$id){
     $table = new QueryBuilder();
     $query = $table->DeleteRow($tableName);
     $stmt = $this->Connect()->prepare($query);
     $stmt->execute([$id]);
   }
-  // Handle in Progress
+
   public function CountRows($tableName){
     $table = new QueryBuilder();
     $query = $table->Count_All_Rows($tableName);
