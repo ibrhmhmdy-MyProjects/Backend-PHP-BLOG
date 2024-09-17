@@ -38,9 +38,12 @@ $author = $db->Get_Row_ID("users",$id);
                   <label class="form-label" for="form3Example3">Password</label>
                   <input type="password" id="form3Example3" class="form-control" name="password" placeholder="Enter New Password"/>
                 </div>
-                <div class="data-mdb-input-init form-outline mb-4">
-                  <button type="submit" name="submit" data-mdb-ripple-init class="btn btn-primary btn-block mb-4">
+                <div class="d-flex justify-content-center align-items-center">
+                  <button type="submit" name="submit" data-mdb-ripple-init class="btn btn-primary mx-4">
                     Update
+                  </button>
+                  <button type="submit" name="submit" data-mdb-ripple-init class="btn btn-danger mx-4">
+                    Delete Account
                   </button>
                 </div>
               </form>

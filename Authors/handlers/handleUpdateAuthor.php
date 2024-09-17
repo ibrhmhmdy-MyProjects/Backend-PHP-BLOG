@@ -23,8 +23,15 @@ if($req->hasRequest($req->POST("submit"))){
       $values[] = $password;
     }
     $db->UpdateRow("users",$columns,$values,$id);
+    $auhtor = $db->Get_Row_ID("users",$id);
+    $user_id = $auhtor['id'];
+    $user_name = $auhtor['username'];
+    $user_email = $auhtor['email'];
+    $user_login = ['id' => $user_id,'username' => $user_name, 'email' => $user_email]; 
+    $Session->Set("current_login", $user_login);
+    $req->Redirect("../index.php?id=$id");
   }else{
     $Session->Set("errors",$valid->errors);
+    $req->Redirect("../EditAuthor.php?id=$id");
   }
-  $req->Redirect("../index.php?id=$id");
 }

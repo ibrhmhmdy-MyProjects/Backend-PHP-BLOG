@@ -29,7 +29,7 @@
                                 $email = $current_user['email'];
                         ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="Authors/index.php?id=<?= $user_id; ?>">MyPosts</a>
+                            <a class="nav-link" href="Authors/index.php?id=<?= $user_id; ?>">Dashboard</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="handlers/handleLogout.php">Logout</a>
