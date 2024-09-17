@@ -13,6 +13,7 @@
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container">
                 <a class="navbar-brand" href="index.php">BLOG</a>
+                <input type="search" name="search" id="search">
                 <nav class="navbar-nav ">
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">

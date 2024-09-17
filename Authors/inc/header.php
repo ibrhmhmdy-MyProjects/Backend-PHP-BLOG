@@ -20,19 +20,20 @@
             ?>
             <div class="container">
                 <a class="navbar-brand" href="index.php?id=<?= $user_id; ?>">Dashboard (<?= $username ?>)</a>               
+                
                 <nav class="navbar-nav ml-auto">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link" href="../index.php">Home</a>
                         </li>
-                        <?php
-                            $countPosts = $db->CountRowsWhere("posts","user_id=?",$user_id);
-                        ?>
                         <li class="nav-item">
                             <a class="nav-link" href="EditAuthor.php?id=<?= $user_id; ?>">Profile</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="../handlers/handleLogout.php">Logout</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../handlers/handleLogout.php">Delete Account</a>
                         </li>
                         <?php }else{ ?>
                         <li class="nav-item">

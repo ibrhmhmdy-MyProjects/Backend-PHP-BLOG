@@ -42,9 +42,6 @@ $author = $db->Get_Row_ID("users",$id);
                   <button type="submit" name="submit" data-mdb-ripple-init class="btn btn-primary mx-4">
                     Update
                   </button>
-                  <button type="submit" name="submit" data-mdb-ripple-init class="btn btn-danger mx-4">
-                    Delete Account
-                  </button>
                 </div>
               </form>
             </div>
