@@ -1,5 +1,9 @@
 <?php require_once "inc/header.php" ?>
+<?php 
+$id = $req->GET("id");
+$author = $db->Get_Row_ID("users",$id);
 
+?>
 <div class="container">
   <div class="row">
     <!-- Section: Design Block -->
@@ -18,32 +22,26 @@
                     $Session->Clear("errors");
                 }
               ?>
-              <form action="handlers/handleRegister.php" method="POST">
+              <form action="handlers/handleUpdateAuthor.php?id=<?= $id ?>" method="POST">
                 <!-- Username input -->
                 <div data-mdb-input-init class="form-outline mb-4">
                   <label class="form-label" for="form3Example1">User Name</label>
-                  <input type="text" id="form3Example1" class="form-control" name="username"/>
+                  <input type="text" id="form3Example1" class="form-control" name="username" value="<?= $author['username'] ?>"/>
                 </div>
                 <!-- Email input -->
                 <div data-mdb-input-init class="form-outline mb-4">
                   <label class="form-label" for="form3Example2">Email address</label>
-                  <input type="text" id="form3Example2" class="form-control" name="email" />
+                  <input type="text" id="form3Example2" class="form-control" name="email"  value="<?= $author['email'] ?>"/>
                 </div>
                 <!-- Password input -->
                 <div data-mdb-input-init class="form-outline mb-4">
                   <label class="form-label" for="form3Example3">Password</label>
-                  <input type="password" id="form3Example3" class="form-control" name="password"/>
+                  <input type="password" id="form3Example3" class="form-control" name="password" placeholder="Enter New Password"/>
                 </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    I have My Account <a href="./Login.php">Login</a>
-                  </div>
-                  <div class="col-md-6">
-                    <!-- Submit button -->
-                    <button type="submit" name="submit" data-mdb-ripple-init class="btn btn-primary btn-block mb-4">
-                      Sign up
-                    </button>
-                  </div>
+                <div class="data-mdb-input-init form-outline mb-4">
+                  <button type="submit" name="submit" data-mdb-ripple-init class="btn btn-primary btn-block mb-4">
+                    Update
+                  </button>
                 </div>
               </form>
             </div>

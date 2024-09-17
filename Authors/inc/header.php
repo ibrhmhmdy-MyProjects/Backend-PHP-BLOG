@@ -21,7 +21,7 @@
             <div class="container">
                 <a class="navbar-brand" href="index.php?id=<?= $user_id; ?>">BLOG</a>               
                 <nav class="navbar-nav ml-auto">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <?php
                             $countPosts = $db->CountRowsWhere("posts","user_id=?",$user_id);
                         ?>

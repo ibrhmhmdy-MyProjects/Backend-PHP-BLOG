@@ -2,16 +2,19 @@
 
 <?php
 $user_id = $Session->Get("current_login")['id'];
-$values[] = $user_id; 
-$posts = $db->Get_Rows_Where("posts", "user_id =?",$values);
+ 
+$posts = $db->Get_Rows_Where("posts", "user_id =?",[$user_id]);
 ?>
 
 <div class="container my-5">
-    <caption>
+    <div class="d-flex justify-content-between align-items-center w-100 mb-3">
+        <caption class="nav-link" href="EditAuthor.php?id=<?= $user_id; ?>">
+            Posts (<?=$countPosts ?>)
+        </caption>
         <a href="AddPost.php" type="button" class="btn btn-sm btn-primary">
             New Post
         </a>
-    </caption>
+    </div>
     <table class="table align-middle mb-0 bg-white">
         <thead class="bg-light">
             <tr>
