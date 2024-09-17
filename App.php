@@ -1,10 +1,10 @@
 <?php
-require_once "Admin/classes/databases/MYSQL.php";
-require_once "Admin/classes/Validations/Validator.php";
-require_once "Admin/classes/Sessions.php";
-require_once "Admin/classes/Request.php";
-require_once "Admin/classes/UploadFiles.php";
-require_once "Admin/classes/Strings.php";
+require_once "Authors/classes/databases/MYSQL.php";
+require_once "Authors/classes/Validations/Validator.php";
+require_once "Authors/classes/Sessions.php";
+require_once "Authors/classes/Request.php";
+require_once "Authors/classes/UploadFiles.php";
+require_once "Authors/classes/Strings.php";
 
 use classes\databases\MYSQL;
 use classes\Validations\Validator;

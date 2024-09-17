@@ -40,7 +40,7 @@ $posts = $db->Get_Rows_Where("posts", "user_id =?",$values);
                                 src="assets/upload/<?= $post['image'] ?>"
                                 alt=""
                                 style="width: 45px; height: 45px"
-                                class="rounded-circle" />
+                                class="rounded" />
                             <div class="ms-3">
                                 <p class="fw-bold mb-1"><?= $post['title'] ?></p>
                             </div>

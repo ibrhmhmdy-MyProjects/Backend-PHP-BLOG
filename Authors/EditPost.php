@@ -7,7 +7,7 @@ $post = $db->Get_Row_ID("posts",$id);
 <div class="container my-5">
     <div class="row">
         <div class="col-lg-6 offset-lg-3">
-            <form action="handlers/handleUpdatePost.php?id=<?= $id ?>" method="POST" enctype="multipart/form-data">
+            <form action="handlers/handleUpdateAuthor.php?id=<?= $id ?>" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="title" class="form-label">Title:</label>
                     <input type="text" class="form-control" id="title" name="title" value="<?= $post['title'] ?>">

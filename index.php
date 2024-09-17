@@ -19,7 +19,7 @@
         ?>
         <div class="col-lg-4 mb-3">
             <div class="card">
-                <img src="admin/assets/upload/<?= $post['image'] ?>" class="card-img-top">
+                <img src="Authors/assets/upload/<?= $post['image'] ?>" class="card-img-top">
                 <div class="card-body">
                     <h5 class="card-title"><?= $post['title'] ?></h5>
                     <?php $author_name = $db->Get_Col_ID("username","users",$post['user_id']); ?>
